@@ -1,0 +1,104 @@
+{
+    "dimension": {
+        "prompt": [
+            "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence represents the same sense with respect to its use in the first sentence. Follow these steps to complete the task:\n\nStep 1. Describe the meaning of the word in the first sentence.\nStep 2. Describe the meaning of the word in the second sentence.\nStep 3. Write a sentence that joins both sentences using zeugma and the same shared word while preserving the same sense. If the construction doesn't make a bad pun, the words have identical sense.\nStep 4. Based on the previous reasoning give your final answer: 'identical' or 'different.'",
+            "You are given two different sentences and a word that is contained in both sentences. Your task is to describe if the provided word is used in the identical sense, or a different sense. Give the final answer in a new line with the word 'identical' or 'different.'"
+        ],
+        "examples":[
+            {
+                "word": "Plane",
+                "e1": "He loves planes and want to become a pilot.",
+                "e2": "The plane landed just now.",
+                "r1": "In the first sentence, 'plane' is used to mean airplane.",
+                "r2": "In the second sentence, 'plane' is used with the sense of airplane.",
+                "c": "\"He loves planes, like the one that landed just now.\" Both sentences uses 'plane' with the same meaning.",
+                "answer": "identical"
+            },
+            {
+                "word": "Cell",
+                "e1": "Anyone leaves a cell phone or handheld at home, many of them faculty members from nearby.",
+                "e2": "I just watch the dirty shadow the window bar makes across the wall of my cell.",
+                "r1": "In sentence 1 it is used with the sense of a mobile unit phone.",
+                "r2": "In sentence 2 is used with the sense of a unit in prison.",
+                "c": "\"The wall of my cell which I leave at home\"The word 'cell' can't be used to represent both cells.",
+                "answer": "different"
+            },
+            {
+                "word": "Arm",
+                "e1": "He has a short arm, a stubby hand, and a left eye that is open twice as wide.",
+                "e2": "I could feel all his muscles tense up in his arm.",
+                "r1": "In sentence 1 it is used with the sense of part of the body.",
+                "r2": "In sentence 2 it is used with the sense of member of a human body.",
+                "c": "\"I could feel all his muscles tense up in his short arm.\" Both sentences uses 'arm' with the same meaning.",
+                "answer": "identical"
+            }
+        ]},
+        "relation":{
+            "prompt": [
+                "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence is related to its use in the first sentence. Follow these steps to complete the task:\n\nStep 1. Describe the meaning of the word in the first sentence.\nStep 2. Describe the meaning of the word in the second sentence.\nStep 3. Compare the uses, determining if the second is related as a metaphor (where the word is used in a similar but non-literal sense), as a metonymy (where the word represents something closely related to or associated with it), or unrelated, used with a different sense.\nStep 4. Based on the third reasoning, write the final answer, 'metaphor', 'metonymy', or 'unrelated.'",
+                "You are given two different sentences and a word that is contained in both sentences. Your task is to describe if the provided word is used as a metaphor, metonymy, or unrelated with respect to the first sentence. After reasoning give the final answer in a new line with the word 'metaphor', 'metonymy', or 'unrelated.'"
+            ],
+            "examples":[
+                {
+                    "word": "Winter",
+                    "e1": "The main objective of this forthcoming decision will be preparation for the winter.",
+                    "e2": "Winter can cause many disruptions for public transport.",
+                    "r1": "In the first sentence, the word 'winter' is literally used to refer to the season characterized by cold temperatures.",
+                    "r2": "In the second sentence, the word 'winter' refer to the problems caused by winter, not winter itself.",
+                    "c": "The word 'winter' in the second sentence is associated with its problems, such as snow, making it a metonymy.",
+                    "answer": "metonymy"
+                },
+                {
+                    "word": "Heart",
+                    "e1": "While he was at the surgery table, the doctor opened his chest to assess his heart.",
+                    "e2": "Personally, I think that in a relationship, you must give your heart and soul to your partner.",
+                    "r1": "In the first sentence, 'heart' is used in the literal sense, referring to the physical organ in the chest.",
+                    "r2": "In the second sentence, 'heart' is used metaphoricaly to represent one's emotions or feelings.",
+                    "c": "In the second sentence 'heart' is related to the first sentence in a metaphorical way.",
+                    "answer": "metaphor"
+                },
+                {
+                    "word": "Bit",
+                    "e1": "When 16-bit linear color depth is selected in the preferences window, this screen will not appear.",
+                    "e2": "The film was not bad, just a bit too long.",
+                    "r1": "In the first sentence, 'bit' is used with the sense of binary digit.",
+                    "r2": "In the second sentence, 'bit' is used with the sense of something small or unimportant of its kind.",
+                    "c": "The word 'bit' has no figurative relation between the usages.",
+                    "answer": "unrelated"
+                }
+            ]},
+            "orientation":{"prompt": [
+                "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the second sense for the word is more positive then the first. Follow this instructions to execute the task:\nStep 1. Describe the meaning of the word in the first sentence.\nStep 2. Describe the meaning of the word in the second sentence.\nStep 3. Leverage the rhetorical strategy of antanagoge, contrasting a positive with a negative, to weigh why one meaning might be more favorable than the other or if they stand neutral.\nStep 4. Based on the third reasoning, write the final answer 'negative', 'positive', or 'neutral.'",
+                "You are given two different sentences and a word that is contained in both sentences. Your task is to describe if the provided word is used in a more positive, negative, or neutral manner in the second sentence with respect to the first sentence. After reasoning give the final answer in a new line with the word 'positive,' 'negative,' or 'neutral.'"
+                ],
+                "examples": [
+                        {
+                            "word": "Awful",
+                            "e1": "As the hiker reached the summit, the breathtaking view of the majestic mountains left him in an awful silence, overwhelmed by the awe-inspiring beauty that surrounded him.",
+                            "e2": "Upon witnessing the gruesome battlefield, the medieval knight was struck with an awful realization of the carnage that lay before him.",
+                            "r1": "The first sentence uses 'awful' as something that inspire admiration and respect.",
+                            "r2": "The second sentence uses 'awful' to refer to something horrible.",
+                            "c": "I'd rather have an awful view than an awful realization of carnage. The second sense is more negative.",
+                            "answer": "negative"
+                        },
+                        {
+                            "word": "Plane",
+			                "e1": "He loves planes and want to become a pilot.",
+			                "e2": "The surface of a table should be plane.",
+			                "r1": "In the first sentence, 'plane' is used to mean airplane.",
+                            "r2": "In the second sentence, 'plane' is used with the sense of flat.",
+                            "c": "There's no particular ordering for these meanings which are neutral between them.",
+                            "answer": "neutral"
+                        },
+                        {
+                            "word": "Terrific",
+                            "e1": "The news reported a terrific storm approaching the coast, prompting evacuations.",
+                            "e2": "She gave a terrific presentation at the conference, impressing everyone.",
+                            "r1": "In sentence 1, 'terrific' means something very bad, frightful.",
+                            "r2": "In sentence 2, 'terrific' is used as something magnific, unusually fine.",
+                            "c": "I'd rather experience a terrific presentation than a terrific storm. The second sense is more positive.",
+                            "answer": "positive"
+                        }
+                    ]
+                }
+}
