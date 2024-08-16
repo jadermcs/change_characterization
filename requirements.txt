@@ -1,0 +1,9 @@
+scikit-learn==1.4
+transformers==4.36.1
+llama-cpp-python===0.2.39
+torch
+numpy
+datasets
+tqdm
+guidance==0.1.10
+accelerate
