@@ -12,7 +12,7 @@
         "r1": "In the first sentence, 'plane' is used to mean airplane.",
         "r2": "In the second sentence, 'plane' is used with the sense of airplane.",
         "c": "\"He loves planes, like the one that landed just now.\" Both sentences uses 'plane' with the same meaning.",
-        "answer": "identical"
+        "answer": "unchanged"
       },
       {
         "word": "Cell",
@@ -21,7 +21,7 @@
         "r1": "In sentence 1 it is used with the sense of a mobile unit phone.",
         "r2": "In sentence 2 is used with the sense of a unit in prison.",
         "c": "\"The wall of my cell which I leave at home\"The word 'cell' can't be used to represent both cells.",
-        "answer": "different"
+        "answer": "changed"
       },
       {
         "word": "Arm",
@@ -30,14 +30,14 @@
         "r1": "In sentence 1 it is used with the sense of part of the body.",
         "r2": "In sentence 2 it is used with the sense of member of a human body.",
         "c": "\"I could feel all his muscles tense up in his short arm.\" Both sentences uses 'arm' with the same meaning.",
-        "answer": "identical"
+        "answer": "unchanged"
       }
     ]
   },
   "relation": {
     "prompt": [
-      "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence is related to its use in the first sentence. Follow these steps to complete the task:\n\nStep 1. Describe the meaning of the word in the first sentence.\nStep 2. Describe the meaning of the word in the second sentence.\nStep 3. Compare the uses, determining if the second is related as a metaphor (where the word is used in a similar but non-literal sense), as a metonymy (where the word represents something closely related to or associated with it), or unrelated, used with a different sense.\nStep 4. Based on the third reasoning, write the final answer, 'metaphor', 'metonymy', or 'unrelated.'",
-      "You are given two different sentences and a word that is contained in both sentences. Your task is to describe if the provided word is used as a metaphor, metonymy, or unrelated with respect to the first sentence. After reasoning give the final answer in a new line with the word 'metaphor', 'metonymy', or 'unrelated.'"
+      "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence is similar to its use in the first sentence. Use the rhetorical device simile to compared the meanings. Describe how one meaning is related (metaphor) or associated (metonymy) to the other. Consider they to be similar only if they have a simile, and you could describe one meaning based on the other. Based on the reasoning, write the final answer, 'changed' if the meaning is not similar, 'unchanged' if the meaning is similar.",
+      "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence is similar to its use in the first sentence. Based on the reasoning, write the final answer, 'changed' if the meaning is not similar, 'unchanged' if the meaning is similar."
     ],
     "examples": [
       {
@@ -47,7 +47,7 @@
         "r1": "In the first sentence, the word 'winter' is literally used to refer to the season characterized by cold temperatures.",
         "r2": "In the second sentence, the word 'winter' refer to the problems caused by winter, not winter itself.",
         "c": "The word 'winter' in the second sentence is associated with its problems, such as snow, making it a metonymy.",
-        "answer": "metonymy"
+        "answer": "unchanged"
       },
       {
         "word": "Heart",
@@ -55,8 +55,8 @@
         "e2": "Personally, I think that in a relationship, you must give your heart and soul to your partner.",
         "r1": "In the first sentence, 'heart' is used in the literal sense, referring to the physical organ in the chest.",
         "r2": "In the second sentence, 'heart' is used metaphoricaly to represent one's emotions or feelings.",
-        "c": "In the second sentence 'heart' is related to the first sentence in a metaphorical way.",
-        "answer": "metaphor"
+        "c": "In the second sentence 'heart' is related to the first sentence in a metaphorical way as the organ heart is used to represent love and feelings.",
+        "answer": "unchanged"
       },
       {
         "word": "Bit",
@@ -65,14 +65,14 @@
         "r1": "In the first sentence, 'bit' is used with the sense of binary digit.",
         "r2": "In the second sentence, 'bit' is used with the sense of something small or unimportant of its kind.",
         "c": "The word 'bit' has no figurative relation between the usages.",
-        "answer": "unrelated"
+        "answer": "changed"
       }
     ]
   },
   "orientation": {
     "prompt": [
-      "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the second sense for the word is more positive then the first. Follow this instructions to execute the task:\nStep 1. Describe the meaning of the word in the first sentence.\nStep 2. Describe the meaning of the word in the second sentence.\nStep 3. Leverage the rhetorical strategy of antanagoge, contrasting a positive with a negative, to weigh why one meaning might be more favorable than the other or if they stand neutral.\nStep 4. Based on the third reasoning, write the final answer 'negative', 'positive', or 'neutral.'",
-      "You are given two different sentences and a word that is contained in both sentences. Your task is to describe if the provided word is used in a more positive, negative, or neutral manner in the second sentence with respect to the first sentence. After reasoning give the final answer in a new line with the word 'positive,' 'negative,' or 'neutral.'"
+      "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word is changed compared to the first. Use the rhetorical device of antanagoge contrasting a positive with a negative, to weigh why one meaning might be more positive than the other or if they stand neutral, e.g., I'd rather do X then Y. Based on the reasoning, write the final answer 'changed' or 'unchanged.'",
+      "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word is changed compared to the first. Based on the reasoning, write the final answer 'changed' or 'unchanged.'"
     ],
     "examples": [
       {
@@ -81,8 +81,8 @@
         "e2": "Upon witnessing the gruesome battlefield, the medieval knight was struck with an awful realization of the carnage that lay before him.",
         "r1": "The first sentence uses 'awful' as something that inspire admiration and respect.",
         "r2": "The second sentence uses 'awful' to refer to something horrible.",
-        "c": "I'd rather have an awful view than an awful realization of carnage. The second sense is more negative.",
-        "answer": "negative"
+        "c": "I'd rather have an awful view than an awful realization of carnage. The sentiment changed.",
+        "answer": "changed"
       },
       {
         "word": "Plane",
@@ -91,7 +91,7 @@
         "r1": "In the first sentence, 'plane' is used to mean airplane.",
         "r2": "In the second sentence, 'plane' is used with the sense of flat.",
         "c": "There's no particular ordering for these meanings which are neutral between them.",
-        "answer": "neutral"
+        "answer": "unchanged"
       },
       {
         "word": "Terrific",
@@ -99,8 +99,8 @@
         "e2": "She gave a terrific presentation at the conference, impressing everyone.",
         "r1": "In sentence 1, 'terrific' means something very bad, frightful.",
         "r2": "In sentence 2, 'terrific' is used as something magnific, unusually fine.",
-        "c": "I'd rather experience a terrific presentation than a terrific storm. The second sense is more positive.",
-        "answer": "positive"
+        "c": "I'd rather experience a terrific presentation than a terrific storm. The sentiment changed.",
+        "answer": "changed"
       }
     ]
   }

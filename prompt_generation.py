@@ -4,7 +4,7 @@ import json
 import pandas as pd
 from transformers import set_seed
 from tqdm import tqdm
-from guidance import models, gen, select
+from guidance import models, gen
 
 TEMP = 0.7
 
@@ -17,6 +17,10 @@ def prompt_gen(data, style=0):
         prompt += "Sentences:\n"
         prompt += f"1) {ex['e1']}\n"
         prompt += f"2) {ex['e2']}\n"
+        prompt += f"1. {ex['r1']}\n"
+        prompt += f"2. {ex['r2']}\n"
+        if style == 0:
+            prompt += f"3. {ex['c']}\n"
         prompt += f"A: {ex['answer']}\n"
     return prompt
 
@@ -73,8 +77,7 @@ def main(raw_args=None):
         text += f"1) {a}\n"
         text += f"2) {b}\n"
         lm = model + text
-        lm += "<think>" + gen(temperature=TEMP) + "</think>"
-        lm += "\nA: " + select(["changed", "unchanged"])
+        lm += gen(temperature=TEMP)
         with open(f"{path}/{args.task}_{args.seed}_{args.model}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
 
