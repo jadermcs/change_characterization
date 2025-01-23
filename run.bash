@@ -9,9 +9,9 @@ for pole in "dimension" "relation" "orientation"; do
         
         for ((i = 0; i < 5; i++)); do
             echo "rethorics $model"
-            python prompt_generation.py data/$pole.csv few_shot.json $pole --reason --style 0 --model $model --seed $i --ctx $ctx
+            python prompt_generation.py data/$pole.csv few_shot.json $pole --style 0 --model $model --seed $i --ctx $ctx
             echo "cot $model"
-            python prompt_generation.py data/$pole.csv few_shot.json $pole --reason --style 1 --model $model --seed $i --ctx $ctx
+            python prompt_generation.py data/$pole.csv few_shot.json $pole --style 1 --model $model --seed $i --ctx $ctx
             # echo "few-shot $model"
             # python prompt_generation.py data/$pole.csv few_shot.json $pole --style 1 --model $model --seed $i
         done
