@@ -3,6 +3,9 @@ for pole in "dimension" "relation" "orientation"; do
     for model in "Phi-3-mini-4k-instruct-fp16.gguf" "Meta-Llama-3-8B-Instruct-Q8_0.gguf" "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf"; do
         echo "========$pole========"
         ctx="2048"
+        if [[ "$model" = "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf" ]]; then
+            ctx="4096"
+        fi
         
         for ((i = 0; i < 5; i++)); do
             echo "rethorics $model"
