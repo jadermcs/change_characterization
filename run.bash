@@ -1,11 +1,8 @@
 ## QUERY MODEL
 for pole in "dimension" "relation" "orientation"; do
-    for model in "Phi-3-mini-4k-instruct-fp16.gguf" "Meta-Llama-3-8B-Instruct-Q8_0.gguf" "Meta-Llama-3-70B-Instruct-Q2_K.gguf"; do
+    for model in "Phi-3-mini-4k-instruct-fp16.gguf" "Meta-Llama-3-8B-Instruct-Q8_0.gguf" "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf"; do
         echo "========$pole========"
         ctx="2048"
-        if [[ "$model" = "Meta-Llama-3-70B-Instruct-Q2_K.gguf" ]]; then
-            ctx="1024"
-        fi
         
         for ((i = 0; i < 5; i++)); do
             echo "rethorics $model"
