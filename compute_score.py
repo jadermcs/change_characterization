@@ -36,7 +36,7 @@ def main(raw_args=None):
     path = os.path.join(args.path, args.model, args.task, args.style)
 
     for file in os.listdir(path):
-        with open(path+file) as fin:
+        with open(os.path.join(path, file)) as fin:
             data = fin.read()
             label = data.split("\n")[-1].removeprefix("A: ")
             _id = int(file.split("_")[0])
