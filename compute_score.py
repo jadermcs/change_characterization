@@ -19,12 +19,12 @@ def main(raw_args=None):
     TODO
 
     """)
-    parser.add_argument('data')
-    parser.add_argument('seed')
-    parser.add_argument('style')
-    parser.add_argument('path')
-    parser.add_argument('task')
-    parser.add_argument('model')
+    parser.add_argument('--data')
+    parser.add_argument('--seed')
+    parser.add_argument('--style')
+    parser.add_argument('--path')
+    parser.add_argument('--task')
+    parser.add_argument('--model')
     args = parser.parse_args(raw_args)
 
     df1 = pd.read_csv(args.data, sep="\t", quoting=3)
