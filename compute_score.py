@@ -36,11 +36,14 @@ def main(raw_args=None):
     path = os.path.join(args.path, args.model, args.task, args.style)
 
     for file in os.listdir(path):
-        with open(os.path.join(path, file)) as fin:
+        if not file.startswith(args.seed):
+            continue
+        file_path = os.path.join(path, file)
+        with open(file_path) as fin:
             data = fin.read()
             label = data.split("\n")[-1].removeprefix("A: ")
             _id = int(file.split("_")[0])
-            files.append(file)
+            files.append(file_path)
             real.append(df1.iloc[_id]["label"])
             pred.append(label)
 
