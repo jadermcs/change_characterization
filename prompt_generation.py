@@ -67,7 +67,7 @@ def main(raw_args=None):
     if args.sample:
         group = group.sample(frac=.1, random_state=42)
     # index, word, sentence a, sentence b
-    path = f"output/{args.style}"
+    path = f"output/{args.model}/{args.task}/{args.style}"
     os.makedirs(path, exist_ok=True)
     for idx, w, a, b in tqdm(list(group.itertuples())):
         text = prompt_gen(data[args.task], args.style)
@@ -76,9 +76,10 @@ def main(raw_args=None):
         text += "Sentences:\n"
         text += f"1) {a}\n"
         text += f"2) {b}\n"
+        text += "<think>"
         lm = model + text
         lm += gen(temperature=TEMP)
-        with open(f"{path}/{args.task}_{args.seed}_{args.model}_{idx}.txt", "w") as fout:
+        with open(f"{path}/{idx}_{args.seed}.txt", "w") as fout:
             fout.write(str(lm))
 
 
