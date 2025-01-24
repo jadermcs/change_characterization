@@ -79,7 +79,7 @@ def main(raw_args=None):
         text += "<think>"
         lm = model + text
         lm += gen(temperature=TEMP)
-        with open(f"{path}/{idx}_{args.seed}.txt", "w") as fout:
+        with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
 
 
