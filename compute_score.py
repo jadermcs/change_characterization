@@ -19,31 +19,32 @@ def main(raw_args=None):
     TODO
 
     """)
-    parser.add_argument('corpus')
+    parser.add_argument('data')
     parser.add_argument('seed')
+    parser.add_argument('style')
     parser.add_argument('path')
     parser.add_argument('task')
     parser.add_argument('model')
     args = parser.parse_args(raw_args)
 
-    df1 = pd.read_csv(args.corpus, sep="\t", quoting=3)
+    df1 = pd.read_csv(args.data, sep="\t", quoting=3)
 
     real = []
     pred = []
     files = []
 
-    for file in os.listdir(args.path):
-        if file.startswith(f"{args.task}_{args.seed}_{args.model}"):
-            with open(args.path + file) as fin:
-                data = fin.read()
-                label = data.split("\n")[-1].removeprefix("A: ")
-                _id = int(file.split("_")[-1].removesuffix(".txt"))
-                files.append(file)
-                real.append(df1.iloc[_id]["label"])
-                pred.append(label)
+    path = os.path.join(args.path, args.model, args.task, args.style)
 
-    method = args.path.split("/")[1]
-    exp_name = f"results/{args.task}_{args.seed}_{args.model}_{method}"
+    for file in os.listdir(path):
+        with open(path+file) as fin:
+            data = fin.read()
+            label = data.split("\n")[-1].removeprefix("A: ")
+            _id = int(file.split("_")[0])
+            files.append(file)
+            real.append(df1.iloc[_id]["label"])
+            pred.append(label)
+
+    exp_name = f"results/{args.model}/{args.task}/{args.style}/{args.seed}"
     with open(f"{exp_name}.txt", "w") as fout:
         fout.write(classification_report(real, pred))
     out = pd.DataFrame({"file": files, "real": real, "predict": pred})

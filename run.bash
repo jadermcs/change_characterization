@@ -22,11 +22,11 @@ for pole in "dimension" "relation" "orientation"; do
         echo "========$pole========"
         echo "rethorics $model"
         for ((i = 0; i < 5; i++)); do
-            python compute_score.py data/$pole.csv $i output/0/ $pole $model
+            python compute_score.py --data data/$pole.csv --seed $i --style 0 --task $pole --model $model
         done
         echo "cot $model"
         for ((i = 0; i < 5; i++)); do
-            python compute_score.py data/$pole.csv $i output/1/ $pole $model
+            python compute_score.py --data data/$pole.csv --seed $i --style 1 --task $pole --model $model
         done
     done
 done
