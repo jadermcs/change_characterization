@@ -45,6 +45,7 @@ def main(raw_args=None):
             pred.append(label)
 
     exp_name = f"results/{args.model}/{args.task}/{args.style}/{args.seed}"
+    os.makedirs(exp_name, exist_ok=True)
     with open(f"{exp_name}.txt", "w") as fout:
         fout.write(classification_report(real, pred))
     out = pd.DataFrame({"file": files, "real": real, "predict": pred})
