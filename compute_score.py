@@ -42,6 +42,7 @@ def main(raw_args=None):
         with open(file_path) as fin:
             data = fin.read()
             label = data.split("\n")[-1].removeprefix("A: ")
+            label = "unchanged" if "unchanged" in label else "changed"
             _id = int(file.split("_")[1].removesuffix(".txt"))
             files.append(file_path)
             real.append(df1.iloc[_id]["label"])
