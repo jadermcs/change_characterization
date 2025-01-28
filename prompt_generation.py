@@ -77,7 +77,7 @@ def main(raw_args=None):
         text += f"2) {b}\n"
         text += "<think>"
         lm = model + text
-        lm += gen(temperature=TEMP, stop="</think>")
+        lm += gen(temperature=TEMP, stop="</think>", max_tokens=4096)
         lm += "</think>"
         lm += "\nA: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
