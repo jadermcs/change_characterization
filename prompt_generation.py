@@ -4,7 +4,7 @@ import json
 import pandas as pd
 from transformers import set_seed
 from tqdm import tqdm
-from guidance import models, gen
+from guidance import models, gen, select
 
 TEMP = 0.7
 
@@ -60,6 +60,7 @@ def main(raw_args=None):
             echo=False)
 
     corpus = pd.read_csv(args.corpus, quoting=3, sep='\t')
+    labels = corpus.label.unique().values
     with open(args.instruction) as fin:
         data = json.load(fin)
 
@@ -78,7 +79,8 @@ def main(raw_args=None):
         text += f"2) {b}\n"
         text += "<think>"
         lm = model + text
-        lm += gen(temperature=TEMP)
+        lm += gen(temperature=TEMP, stop="</think>")
+        lm += "A: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
 
