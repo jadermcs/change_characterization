@@ -78,7 +78,8 @@ def main(raw_args=None):
         text += "<think>"
         lm = model + text
         lm += gen(temperature=TEMP, stop="</think>")
-        lm += "A: " + select(labels)
+        lm += "</think>"
+        lm += "\nA: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
 
