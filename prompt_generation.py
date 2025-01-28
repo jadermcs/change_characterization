@@ -65,8 +65,6 @@ def main(raw_args=None):
         data = json.load(fin)
 
     group = corpus[["word", "context1", "context2"]]
-    if args.sample:
-        group = group.sample(frac=.1, random_state=42)
     # index, word, sentence a, sentence b
     path = f"output/{args.model}/{args.task}/{args.style}"
     os.makedirs(path, exist_ok=True)
