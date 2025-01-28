@@ -60,7 +60,7 @@ def main(raw_args=None):
             echo=False)
 
     corpus = pd.read_csv(args.corpus, quoting=3, sep='\t')
-    labels = corpus.label.unique().values
+    labels = corpus.label.unique().tolist()
     with open(args.instruction) as fin:
         data = json.load(fin)
 
