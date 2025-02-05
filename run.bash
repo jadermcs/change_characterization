@@ -1,9 +1,9 @@
 ## QUERY MODEL
 for pole in "dimension" "relation" "orientation"; do
-    for model in "DeepSeek-R1-Distill-Qwen-7B-Q8_0.gguf"; do
+    for model in "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf"; do
         echo "========$pole========"
         ctx="2048"
-        if [[ "$model" = "DeepSeek-R1-Distill-Qwen-7B-Q8_0.gguf" ]]; then
+        if [[ "$model" = "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf" ]]; then
             ctx="16384"
         fi
         
@@ -18,7 +18,7 @@ done
 
 echo "## RUN EVALUATION"
 for pole in "dimension" "relation" "orientation"; do
-    for model in "DeepSeek-R1-Distill-Qwen-7B-Q8_0.gguf"; do
+    for model in "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf"; do
         echo "========$pole========"
         echo "rethorics $model"
         for ((i = 0; i < 5; i++)); do
