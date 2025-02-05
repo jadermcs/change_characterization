@@ -47,12 +47,12 @@ def main(raw_args=None):
             real.append(df1.iloc[_id]["label"])
             pred.append(label)
 
-    exp_name = f"results/{args.model}/{args.task}/{args.style}/{args.seed}"
+    exp_name = f"results/{args.model}/{args.task}/{args.style}/"
     os.makedirs(exp_name, exist_ok=True)
-    with open(f"{exp_name}.txt", "w") as fout:
+    with open(f"{exp_name}{args.seed}.txt", "w") as fout:
         fout.write(classification_report(real, pred))
     out = pd.DataFrame({"file": files, "real": real, "predict": pred})
-    out.to_csv(f"{exp_name}.csv")
+    out.to_csv(f"{exp_name}{args.seed}.csv")
 
     print(accuracy_score(real, pred))
     cm = confusion_matrix(real, pred)
@@ -65,7 +65,7 @@ def main(raw_args=None):
     plt.xlabel('Predictions', fontsize=18)
     plt.ylabel('Actuals', fontsize=18)
     plt.title('Confusion Matrix', fontsize=18)
-    plt.savefig(f"{exp_name}.png")
+    plt.savefig(f"{exp_name}{args.seed}.png")
 
 
 if __name__ == "__main__":

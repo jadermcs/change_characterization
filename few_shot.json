@@ -69,8 +69,8 @@
             ]},
             "orientation":{
                 "prompt": [
-                    "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word is changed compared to the first. Use the rhetorical device of antanagoge contrasting a positive with a negative, to weigh why one meaning might be more positive than the other or if they stand neutral, e.g., I'd rather do X then Y.  Based on the reasoning, write the final answer. Write 'positive', if the second sense is more positive, 'negative' if the second sense is more negative or 'unchanged,' if the sense has no change in polarity.",
-                    "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word is changed compared to the first. Based on the reasoning, write the final answer. Write 'positive', if the second sense is more positive, 'negative' if the second sense is more negative or 'unchanged,' if the sense has no change in polarity."
+                    "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word is changed compared to the first. Use the rhetorical device of antanagoge contrasting a positive with a negative, to weigh why one meaning might be more positive than the other or if they stand neutral, e.g., I'd rather do X then Y.  Based on the reasoning, write the final answer. Write 'positive', if the second sense is more positive, 'negative' if the second sense is more negative or 'neutral,' if the sense has no change in polarity.",
+                    "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word is changed compared to the first. Based on the reasoning, write the final answer. Write 'positive', if the second sense is more positive, 'negative' if the second sense is more negative or 'neutral,' if the sense has no change in polarity."
                 ],
                 "examples": [
                         {
@@ -89,7 +89,7 @@
 			                "r1": "In the first sentence, 'plane' is used to mean airplane.",
                             "r2": "In the second sentence, 'plane' is used with the sense of flat.",
                             "c": "There's no particular ordering for these meanings which are neutral between them.",
-                            "answer": "unchanged"
+                            "answer": "neutral"
                         },
                         {
                             "word": "Terrific",
