@@ -57,6 +57,7 @@ def main(raw_args=None):
             n_gpu_layers=-1,
             n_ctx=args.ctx,
             flash_attn=True,
+            logits_all=True,
             echo=False)
 
     corpus = pd.read_csv(args.corpus, quoting=3, sep='\t')

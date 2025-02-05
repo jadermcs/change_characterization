@@ -1,9 +1,9 @@
 scikit-learn==1.4
-transformers==4.36.1
-llama-cpp-python===0.2.39
+transformers==4.48.2
+llama-cpp-python===0.3.7
 torch
 numpy
 datasets
 tqdm
-guidance==0.1.10
+guidance==0.2.0
 accelerate
