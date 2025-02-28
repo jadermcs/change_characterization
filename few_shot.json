@@ -6,7 +6,7 @@
         ],
         "examples":[
             {
-                "word": "Plane",
+                "lemma": "Plane",
                 "e1": "He loves planes and want to become a pilot.",
                 "e2": "The plane landed just now.",
                 "r1": "In the first sentence, 'plane' is used to mean airplane.",
@@ -15,7 +15,7 @@
                 "answer": "identical"
             },
             {
-                "word": "Cell",
+                "lemma": "Cell",
                 "e1": "Anyone leaves a cell phone or handheld at home, many of them faculty members from nearby.",
                 "e2": "I just watch the dirty shadow the window bar makes across the wall of my cell.",
                 "r1": "In sentence 1 it is used with the sense of a mobile unit phone.",
@@ -24,7 +24,7 @@
                 "answer": "different"
             },
             {
-                "word": "Arm",
+                "lemma": "Arm",
                 "e1": "He has a short arm, a stubby hand, and a left eye that is open twice as wide.",
                 "e2": "I could feel all his muscles tense up in his arm.",
                 "r1": "In sentence 1 it is used with the sense of part of the body.",
@@ -40,7 +40,7 @@
             ],
             "examples":[
                 {
-                    "word": "Winter",
+                    "lemma": "Winter",
                     "e1": "The main objective of this forthcoming decision will be preparation for the winter.",
                     "e2": "Winter can cause many disruptions for public transport.",
                     "r1": "In the first sentence, the word 'winter' is literally used to refer to the season characterized by cold temperatures.",
@@ -49,7 +49,7 @@
                     "answer": "metonymy"
                 },
                 {
-                    "word": "Heart",
+                    "lemma": "Heart",
                     "e1": "While he was at the surgery table, the doctor opened his chest to assess his heart.",
                     "e2": "Personally, I think that in a relationship, you must give your heart and soul to your partner.",
                     "r1": "In the first sentence, 'heart' is used in the literal sense, referring to the physical organ in the chest.",
@@ -58,7 +58,7 @@
                     "answer": "metaphor"
                 },
                 {
-                    "word": "Bit",
+                    "lemma": "Bit",
                     "e1": "When 16-bit linear color depth is selected in the preferences window, this screen will not appear.",
                     "e2": "The film was not bad, just a bit too long.",
                     "r1": "In the first sentence, 'bit' is used with the sense of binary digit.",
@@ -74,7 +74,7 @@
                 ],
                 "examples": [
                         {
-                            "word": "Awful",
+                            "lemma": "Awful",
                             "e1": "As the hiker reached the summit, the breathtaking view of the majestic mountains left him in an awful silence, overwhelmed by the awe-inspiring beauty that surrounded him.",
                             "e2": "Upon witnessing the gruesome battlefield, the medieval knight was struck with an awful realization of the carnage that lay before him.",
                             "r1": "The first sentence uses 'awful' as something that inspire admiration and respect.",
@@ -83,7 +83,7 @@
                             "answer": "negative"
                         },
                         {
-                            "word": "Plane",
+                            "lemma": "Plane",
 			                "e1": "He loves planes and want to become a pilot.",
 			                "e2": "The surface of a table should be plane.",
 			                "r1": "In the first sentence, 'plane' is used to mean airplane.",
@@ -92,7 +92,7 @@
                             "answer": "neutral"
                         },
                         {
-                            "word": "Terrific",
+                            "lemma": "Terrific",
                             "e1": "The news reported a terrific storm approaching the coast, prompting evacuations.",
                             "e2": "She gave a terrific presentation at the conference, impressing everyone.",
                             "r1": "In sentence 1, 'terrific' means something very bad, frightful.",

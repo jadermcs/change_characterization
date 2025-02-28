@@ -13,7 +13,7 @@ def prompt_gen(data, style=0):
     prompt = data["prompt"][style] + "\n"
     for ex in data["examples"]:
         prompt += "---\n"
-        prompt += f"Word: {ex['word']}\n"
+        prompt += f"Word: {ex['lemma']}\n"
         prompt += "Sentences:\n"
         prompt += f"1) {ex['e1']}\n"
         prompt += f"2) {ex['e2']}\n"
@@ -64,8 +64,7 @@ def main(raw_args=None):
     with open(args.instruction) as fin:
         data = json.load(fin)
 
-    group = corpus[["WORD", "USAGE_1", "USAGE_2"]]
-    # index, word, sentence a, sentence b
+    group = corpus[["LEMMA", "USAGE_1", "USAGE_2"]]
     path = f"output/{args.model}/{args.task}/{args.style}"
     os.makedirs(path, exist_ok=True)
     for idx, w, a, b in tqdm(list(group.itertuples())):
