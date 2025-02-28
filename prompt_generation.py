@@ -60,11 +60,11 @@ def main(raw_args=None):
             echo=False)
 
     corpus = pd.read_csv(args.corpus, quoting=3, sep='\t')
-    labels = corpus.label.unique().tolist()
+    labels = corpus.LABEL.unique().tolist()
     with open(args.instruction) as fin:
         data = json.load(fin)
 
-    group = corpus[["word", "context1", "context2"]]
+    group = corpus[["WORD", "USAGE_1", "USAGE_2"]]
     # index, word, sentence a, sentence b
     path = f"output/{args.model}/{args.task}/{args.style}"
     os.makedirs(path, exist_ok=True)

@@ -44,7 +44,7 @@ def main(raw_args=None):
             label = data.split("\n")[-1].removeprefix("A: ")
             _id = int(file.split("_")[1].removesuffix(".txt"))
             files.append(file_path)
-            real.append(df1.iloc[_id]["label"])
+            real.append(df1.iloc[_id]["LABEL"])
             pred.append(label)
 
     exp_name = f"results/{args.model}/{args.task}/{args.style}/"

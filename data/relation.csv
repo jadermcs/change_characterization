@@ -1,4 +1,4 @@
-word	sense1	sense2	pos1	pos2	context1	context2	label
+WORD	SENSE1	SENSE2	POS1	POS2	CONTEXT1	CONTEXT2	LABEL
 breathe	oewn-00001740-v	oewn-00931665-v	95	36	They have told us that they are particularly concerned with the quality of the air that we all breathe.	The estate is beautiful and totally breathes the spirit of Provence.	metaphor
 bathing	oewn-00035596-v	oewn-01584919-v	87	20	It will also enable the inhabitants to go back to the beaches that are today unfit for bathing.	The inner courtyard bathing in natural light will give visitors an ample and adequate impression of the pleasant atmosphere of the clinic.	metaphor
 wounded	oewn-00069650-v	oewn-01797206-v	87	7	Over the last four years, no International Criminal Court witnesses or staff have been wounded or killed.	He had wounded her pride more than she would ever have admitted	metaphor

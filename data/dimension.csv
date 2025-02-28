@@ -1,4 +1,4 @@
-word	pos	index	context1	context2	label
+WORD	POS	INDEX	CONTEXT1	CONTEXT2	LABEL
 academy	N	1-2	The Academy of Music.	The French Academy.	identical
 admit	V	1-2	To admit a serious thought into the mind.	This pipe admits air.	different
 advance	V	2-1	Can you advance me some money?	To advance one's interests.	different
