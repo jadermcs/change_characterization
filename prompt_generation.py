@@ -11,6 +11,7 @@ TEMP = 0.7
 
 def prompt_gen(data, style=0):
     prompt = data["prompt"][style] + "\n"
+    prompt += "Examples:\n"
     for ex in data["examples"]:
         prompt += "---\n"
         prompt += f"Word: {ex['lemma']}\n"
@@ -70,6 +71,7 @@ def main(raw_args=None):
     for idx, w, a, b in tqdm(list(group.itertuples())):
         text = prompt_gen(data[args.task], args.style)
         text += "---\n"
+        text += "Task:\n"
         text += f"Word: {w.replace('_', ' ').capitalize()}\n"
         text += "Sentences:\n"
         text += f"1) {a}\n"
