@@ -5,31 +5,33 @@ import pandas as pd
 from transformers import set_seed
 from tqdm import tqdm
 import guidance
-from guidance import models, gen, select, system, user, assistant
+from guidance import models, gen, select
 
 TEMP = 0.7
+
+user = "<｜User｜>"
+assistant = "<｜Assistant｜>"
 
 
 @guidance
 def prompt_gen(lm, data, rhetorics=False):
-    with system():
-        lm += data["system"]
-    with user():
-        lm += data["prompt"]
+    lm += data["system"]
+    lm += user
+    lm += data["prompt"]
+    if rhetorics:
+        lm += data["rhetorics"]
+    lm += "Examples:\n"
+    for ex in data["examples"]:
+        lm += "---\n"
+        lm += f"Word: {ex['lemma']}\n"
+        lm += "Sentences:\n"
+        lm += f"1) {ex['e1']}\n"
+        lm += f"2) {ex['e2']}\n"
+        lm += f"1. {ex['r1']}\n"
+        lm += f"2. {ex['r2']}\n"
         if rhetorics:
-            lm += data["rhetorics"]
-        lm += "Examples:\n"
-        for ex in data["examples"]:
-            lm += "---\n"
-            lm += f"Word: {ex['lemma']}\n"
-            lm += "Sentences:\n"
-            lm += f"1) {ex['e1']}\n"
-            lm += f"2) {ex['e2']}\n"
-            lm += f"1. {ex['r1']}\n"
-            lm += f"2. {ex['r2']}\n"
-            if rhetorics:
-                lm += f"3. {ex['c']}\n"
-            lm += f"A: {ex['answer']}\n"
+            lm += f"3. {ex['c']}\n"
+        lm += f"A: {ex['answer']}\n"
     return lm
 
 
@@ -77,21 +79,20 @@ def main(raw_args=None):
     path = f"output/{args.model}/{args.task}/{style}"
     os.makedirs(path, exist_ok=True)
     for idx, w, a, b in tqdm(list(group.itertuples())):
-        with user():
-            lm = model + prompt_gen(data[args.task], args.rhetorics)
-            lm += "---\n"
-            lm += "Task:\n"
-            lm += f"Word: {w.replace('_', ' ').capitalize()}\n"
-            lm += "Sentences:\n"
-            lm += f"1) {a}\n"
-            lm += f"2) {b}\n"
-        with assistant():
-            lm += "<think>"
-            lm += gen(temperature=TEMP, stop="</think>", max_tokens=4096)
-            lm += "</think>\n"
-            lm += gen(temperature=TEMP, max_tokens=512)
-            lm += "\nBased on my reasoning, here is my final answer:\n"
-            lm += "Answer: " + select(labels)
+        lm = model + prompt_gen(data[args.task], args.rhetorics)
+        lm += "---\n"
+        lm += "Task:\n"
+        lm += f"Word: {w.replace('_', ' ').capitalize()}\n"
+        lm += "Sentences:\n"
+        lm += f"1) {a}\n"
+        lm += f"2) {b}\n"
+        lm += assistant
+        lm += "<think>"
+        lm += gen(temperature=TEMP, stop="</think>", max_tokens=4096)
+        lm += "</think>\n"
+        lm += gen(temperature=TEMP, max_tokens=512)
+        lm += "\nBased on my reasoning, here is my final answer:\n"
+        lm += "Answer: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
 
