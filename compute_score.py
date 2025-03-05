@@ -21,7 +21,7 @@ def main(raw_args=None):
     """)
     parser.add_argument('--data')
     parser.add_argument('--seed')
-    parser.add_argument('--rhetorics')
+    parser.add_argument('--rhetorics', action='store_true')
     parser.add_argument('--path')
     parser.add_argument('--task')
     parser.add_argument('--model')
