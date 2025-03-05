@@ -2,7 +2,7 @@
     "dimension": {
         "system": "You are an expert linguist analyzing lexical semantics problems.",
         "prompt": "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence represents the same sense with respect to its use in the first sentence. Give your final answer: \nA) identical\nB) different",
-        "rhetoric": "For this task use zeugma. Write a sentence that joins both sentences using zeugma and the same shared word while preserving the same sense. If the construction doesn't make a bad pun, the words have identical sense.\nExample of a bad pun when using zeugma:\n(1) Charles lost his keys.\n(2) Charles lost his temper.\n(3) Charles lost his keys and his temper. (?)\nIn the example above, the two different senses of 'lost' (losing a physical object and losing mental control) generate a bad pun.",
+        "rhetorics": "For this task use zeugma. Write a sentence that joins both sentences using zeugma and the same shared word while preserving the same sense. If the construction doesn't make a bad pun, the words have identical sense.\nExample of a bad pun when using zeugma:\n(1) Charles lost his keys.\n(2) Charles lost his temper.\n(3) Charles lost his keys and his temper. (?)\nIn the example above, the two different senses of 'lost' (losing a physical object and losing mental control) generate a bad pun.",
         "examples":[
             {
                 "lemma": "Plane",

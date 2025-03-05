@@ -7,7 +7,7 @@ for pole in "dimension" "relation" "orientation"; do
             ctx="16384"
         fi
         
-        for ((i = 0; i < 5; i++)); do
+        for ((i = 0; i < 1; i++)); do
             echo "rethorics $model"
             python prompt_generation.py data/$pole.csv few_shot.json $pole --rhetorics --model $model --seed $i --ctx $ctx
             echo "cot $model"
@@ -21,11 +21,11 @@ for pole in "dimension" "relation" "orientation"; do
     for model in "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf"; do
         echo "========$pole========"
         echo "rethorics $model"
-        for ((i = 0; i < 5; i++)); do
+        for ((i = 0; i < 1; i++)); do
             python compute_score.py --data data/$pole.csv --seed $i --rhetorics --path output --task $pole --model $model
         done
         echo "cot $model"
-        for ((i = 0; i < 5; i++)); do
+        for ((i = 0; i < 1; i++)); do
             python compute_score.py --data data/$pole.csv --seed $i --path output --task $pole --model $model
         done
     done
