@@ -19,7 +19,7 @@ def prompt_gen(lm, data, rhetorics=False):
     lm += user
     lm += data["prompt"]
     if rhetorics:
-        lm += data["rhetorics"]
+        lm += "\n" + data["rhetorics"] + "\n"
     lm += "Examples:\n"
     for ex in data["examples"]:
         lm += "---\n"

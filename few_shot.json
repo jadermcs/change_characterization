@@ -10,7 +10,7 @@
                 "e2": "The plane landed just now.",
                 "r1": "In the first sentence, 'plane' is used to mean airplane.",
                 "r2": "In the second sentence, 'plane' is used with the sense of airplane.",
-                "c": "\"He loves planes, like the one that landed just now.\" Both sentences uses 'plane' with the same meaning.",
+                "c": "\"He loves planes, like the one that landed just now.\" It doesn't make a bad pun so both sentences uses 'plane' with the same meaning.",
                 "answer": "identical"
             },
             {
@@ -19,7 +19,7 @@
                 "e2": "I just watch the dirty shadow the window bar makes across the wall of my cell.",
                 "r1": "In sentence 1 it is used with the sense of a mobile unit phone.",
                 "r2": "In sentence 2 is used with the sense of a unit in prison.",
-                "c": "\"The wall of my cell which I leave at home\"The word 'cell' can't be used to represent both cells.",
+                "c": "\"The wall of my cell which I leave at home.\" It makes a bad pun as the word 'cell' can't be used to represent both cells.",
                 "answer": "different"
             },
             {
@@ -28,7 +28,7 @@
                 "e2": "I could feel all his muscles tense up in his arm.",
                 "r1": "In sentence 1 it is used with the sense of part of the body.",
                 "r2": "In sentence 2 it is used with the sense of member of a human body.",
-                "c": "\"I could feel all his muscles tense up in his short arm.\" Both sentences uses 'arm' with the same meaning.",
+                "c": "\"I could feel all his muscles tense up in his short arm.\" It doesn't make a bad pun so both sentences uses 'arm' with the same meaning.",
                 "answer": "identical"
             }
         ]},
