@@ -21,7 +21,7 @@ def main(raw_args=None):
     """)
     parser.add_argument('--data')
     parser.add_argument('--seed')
-    parser.add_argument('--style')
+    parser.add_argument('--rhetorics')
     parser.add_argument('--path')
     parser.add_argument('--task')
     parser.add_argument('--model')
@@ -33,7 +33,8 @@ def main(raw_args=None):
     pred = []
     files = []
 
-    path = os.path.join(args.path, args.model, args.task, args.style)
+    style = 'rhetorics' if args.rhetorics else 'cot'
+    path = os.path.join(args.path, args.model, args.task, style)
 
     for file in os.listdir(path):
         if not file.startswith(args.seed):
@@ -47,7 +48,7 @@ def main(raw_args=None):
             real.append(df1.iloc[_id]["LABEL"])
             pred.append(label)
 
-    exp_name = f"results/{args.model}/{args.task}/{args.style}/"
+    exp_name = f"results/{args.model}/{args.task}/{style}/"
     os.makedirs(exp_name, exist_ok=True)
     with open(f"{exp_name}{args.seed}.txt", "w") as fout:
         fout.write(classification_report(real, pred))

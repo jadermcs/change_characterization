@@ -4,26 +4,33 @@ import json
 import pandas as pd
 from transformers import set_seed
 from tqdm import tqdm
-from guidance import models, gen, select
+import guidance
+from guidance import models, gen, select, system, user, assistant
 
 TEMP = 0.7
 
 
-def prompt_gen(data, style=0):
-    prompt = data["prompt"][style] + "\n"
-    prompt += "Examples:\n"
-    for ex in data["examples"]:
-        prompt += "---\n"
-        prompt += f"Word: {ex['lemma']}\n"
-        prompt += "Sentences:\n"
-        prompt += f"1) {ex['e1']}\n"
-        prompt += f"2) {ex['e2']}\n"
-        prompt += f"1. {ex['r1']}\n"
-        prompt += f"2. {ex['r2']}\n"
-        if style == 0:
-            prompt += f"3. {ex['c']}\n"
-        prompt += f"A: {ex['answer']}\n"
-    return prompt
+@guidance
+def prompt_gen(lm, data, rhetorics=False):
+    with system():
+        lm += data["system"]
+    with user():
+        lm += data["prompt"]
+        if rhetorics:
+            lm += data["rhetorics"]
+        lm += "Examples:\n"
+        for ex in data["examples"]:
+            lm += "---\n"
+            lm += f"Word: {ex['lemma']}\n"
+            lm += "Sentences:\n"
+            lm += f"1) {ex['e1']}\n"
+            lm += f"2) {ex['e2']}\n"
+            lm += f"1. {ex['r1']}\n"
+            lm += f"2. {ex['r2']}\n"
+            if rhetorics:
+                lm += f"3. {ex['c']}\n"
+            lm += f"A: {ex['answer']}\n"
+    return lm
 
 
 def main(raw_args=None):
@@ -46,7 +53,7 @@ def main(raw_args=None):
     parser.add_argument('corpus')
     parser.add_argument('instruction')
     parser.add_argument('task')
-    parser.add_argument('--style', type=int)
+    parser.add_argument('--rhetorics', action='store_true')
     parser.add_argument('--ctx', type=int, default=1024)
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--model', required=True)
@@ -66,23 +73,25 @@ def main(raw_args=None):
         data = json.load(fin)
 
     group = corpus[["LEMMA", "USAGE_1", "USAGE_2"]]
-    path = f"output/{args.model}/{args.task}/{args.style}"
+    style = 'rhetorics' if args.rhetorics else 'cot'
+    path = f"output/{args.model}/{args.task}/{style}"
     os.makedirs(path, exist_ok=True)
     for idx, w, a, b in tqdm(list(group.itertuples())):
-        text = prompt_gen(data[args.task], args.style)
-        text += "---\n"
-        text += "Task:\n"
-        text += f"Word: {w.replace('_', ' ').capitalize()}\n"
-        text += "Sentences:\n"
-        text += f"1) {a}\n"
-        text += f"2) {b}\n"
-        text += "<think>"
-        lm = model + text
-        lm += gen(temperature=TEMP, stop="</think>", max_tokens=4096)
-        lm += "</think>\n"
-        lm += gen(temperature=TEMP, max_tokens=512)
-        lm += "\nBased on my reasoning, here is my final answer:\n"
-        lm += "Answer: " + select(labels)
+        with user():
+            lm = model + prompt_gen(data[args.task], args.rhetorics)
+            lm += "---\n"
+            lm += "Task:\n"
+            lm += f"Word: {w.replace('_', ' ').capitalize()}\n"
+            lm += "Sentences:\n"
+            lm += f"1) {a}\n"
+            lm += f"2) {b}\n"
+        with assistant():
+            lm += "<think>"
+            lm += gen(temperature=TEMP, stop="</think>", max_tokens=4096)
+            lm += "</think>\n"
+            lm += gen(temperature=TEMP, max_tokens=512)
+            lm += "\nBased on my reasoning, here is my final answer:\n"
+            lm += "Answer: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
 

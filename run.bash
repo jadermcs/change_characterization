@@ -9,9 +9,9 @@ for pole in "dimension" "relation" "orientation"; do
         
         for ((i = 0; i < 5; i++)); do
             echo "rethorics $model"
-            python prompt_generation.py data/$pole.csv few_shot.json $pole --style 0 --model $model --seed $i --ctx $ctx
+            python prompt_generation.py data/$pole.csv few_shot.json $pole --rhetorics --model $model --seed $i --ctx $ctx
             echo "cot $model"
-            python prompt_generation.py data/$pole.csv few_shot.json $pole --style 1 --model $model --seed $i --ctx $ctx
+            python prompt_generation.py data/$pole.csv few_shot.json $pole --model $model --seed $i --ctx $ctx
         done
     done
 done
@@ -22,11 +22,11 @@ for pole in "dimension" "relation" "orientation"; do
         echo "========$pole========"
         echo "rethorics $model"
         for ((i = 0; i < 5; i++)); do
-            python compute_score.py --data data/$pole.csv --seed $i --style 0 --path output --task $pole --model $model
+            python compute_score.py --data data/$pole.csv --seed $i --rhetorics --path output --task $pole --model $model
         done
         echo "cot $model"
         for ((i = 0; i < 5; i++)); do
-            python compute_score.py --data data/$pole.csv --seed $i --style 1 --path output --task $pole --model $model
+            python compute_score.py --data data/$pole.csv --seed $i --path output --task $pole --model $model
         done
     done
 done

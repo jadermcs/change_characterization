@@ -1,9 +1,8 @@
 {
     "dimension": {
-        "prompt": [
-            "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence represents the same sense with respect to its use in the first sentence. For this task use zeugma. Write a sentence that joins both sentences using zeugma and the same shared word while preserving the same sense. If the construction doesn't make a bad pun, the words have identical sense. Based on the reasoning give your final answer: 'identical' or 'different.'\nExample of a bad pun when using zeugma:\n(1) Charles lost his keys.\n(2) Charles lost his temper.\n(3) Charles lost his keys and his temper. (?)\nIn the example above, the two different senses of 'lost' (losing a physical object and losing mental control) generate a bad pun.",
-            "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence represents the same sense with respect to its use in the first sentence. Give your final answer: 'identical' or 'different.'"
-        ],
+        "system": "You are an expert linguist analyzing lexical semantics problems.",
+        "prompt": "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence represents the same sense with respect to its use in the first sentence. Give your final answer: \nA) identical\nB) different",
+        "rhetoric": "For this task use zeugma. Write a sentence that joins both sentences using zeugma and the same shared word while preserving the same sense. If the construction doesn't make a bad pun, the words have identical sense.\nExample of a bad pun when using zeugma:\n(1) Charles lost his keys.\n(2) Charles lost his temper.\n(3) Charles lost his keys and his temper. (?)\nIn the example above, the two different senses of 'lost' (losing a physical object and losing mental control) generate a bad pun.",
         "examples":[
             {
                 "lemma": "Plane",
@@ -34,10 +33,9 @@
             }
         ]},
         "relation":{
-            "prompt": [
-                "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence is similar to its use in the first sentence. Use the rhetorical device simile to compared the meanings. Describe how one meaning is related (metaphor) or associated (metonymy) to the other. Consider they to be similar only if they have a simile, and you could describe one meaning based on the other. Based on the reasoning, write the final answer, 'metaphor' if the meaning is related, 'metonymy' if the meaning is associated, or 'unrelated' if the two meanings have no connection.",
-                "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence is similar to its use in the first sentence. Based on the reasoning, write the final answer, 'metaphor' if the meaning is related, 'metonymy' if the meaning is associated, or 'unrelated' if the two meanings have no connection."
-            ],
+            "system": "You are an expert linguist analyzing lexical semantics problems.",
+            "prompt": "You are presented with two sentences that both contain a specific word. Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence is similar to its use in the first sentence. Based on the reasoning, write the final answer.\nA) metaphor\nB) metonymy\nC) unrelated",
+            "rhetorics": "Use the rhetorical device simile to compared the meanings. Describe how one meaning is related (metaphor) or associated (metonymy) to the other. Consider they to be similar only if they have a simile, and you could describe one meaning based on the other.",
             "examples":[
                 {
                     "lemma": "Winter",
@@ -68,10 +66,9 @@
                 }
             ]},
             "orientation":{
-                "prompt": [
-                    "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word changed compared to the first. Use the rhetorical device of antanagoge contrasting a positive with a negative, to weigh why one meaning might be more positive than the other or if they stand neutral, e.g., I'd rather do X then Y.  Based on the reasoning, write the final answer. Write 'amelioration', if the second sense is more positive, 'pejoration' if the second sense is more negative or 'neutral,' if the sense has no change in polarity.",
-                    "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word changed compared to the first. Based on the reasoning, write the final answer. Write 'amelioration', if the second sense is more positive, 'pejoration' if the second sense is more negative or 'neutral,' if the sense has no change in polarity."
-                ],
+                "system": "You are an expert linguist analyzing lexical semantics problems.",
+                "prompt": "You will be provided with two sentences that share a common word used with different senses. Your task is to describe if the sentiment for the second sense of the word changed compared to the first. Based on the reasoning, write the final answer. \nA) amelioration\nB) pejoration\nC) neutral",
+                "rhetorics": "Use the rhetorical device of antanagoge contrasting a positive with a negative, to weigh why one meaning might be more positive than the other or if they stand neutral, e.g., I'd rather do X then Y.",
                 "examples": [
                         {
                             "lemma": "Awful",
