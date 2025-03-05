@@ -41,7 +41,7 @@ def main(raw_args=None):
         file_path = os.path.join(path, file)
         with open(file_path) as fin:
             data = fin.read()
-            label = data.split("\n")[-1].removeprefix("A: ")
+            label = data.split("\n")[-1].removeprefix("Answer: ")
             _id = int(file.split("_")[1].removesuffix(".txt"))
             files.append(file_path)
             real.append(df1.iloc[_id]["LABEL"])

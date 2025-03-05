@@ -79,8 +79,10 @@ def main(raw_args=None):
         text += "<think>"
         lm = model + text
         lm += gen(temperature=TEMP, stop="</think>", max_tokens=4096)
-        lm += "</think>"
-        lm += "\nA: " + select(labels)
+        lm += "</think>\n"
+        lm += gen(temperature=TEMP, max_tokens=512)
+        lm += "\nBased on my reasoning, here is my final answer:\n"
+        lm += "Answer: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
 
