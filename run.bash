@@ -1,6 +1,6 @@
 ## QUERY MODEL
 for pole in "dimension" "relation" "orientation"; do
-    for model in "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf"; do
+    for model in "DeepSeek-R1-Distill-Qwen-14B-Q6_K_L.gguf"; do
         echo "========$pole========"
         ctx="2048"
         if [[ "$model" = "DeepSeek-R1-Distill-Llama-8B-Q8_0.gguf" ]]; then

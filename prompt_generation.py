@@ -19,8 +19,8 @@ def prompt_gen(lm, data, rhetorics=False):
     lm += user
     lm += data["prompt"]
     if rhetorics:
-        lm += "\n" + data["rhetorics"] + "\n"
-    lm += "Examples:\n"
+        lm += "\n" + data["rhetorics"]
+    lm += "\nExamples:\n"
     for ex in data["examples"]:
         lm += "---\n"
         lm += f"Word: {ex['lemma']}\n"
@@ -31,7 +31,7 @@ def prompt_gen(lm, data, rhetorics=False):
         lm += f"2. {ex['r2']}\n"
         if rhetorics:
             lm += f"3. {ex['c']}\n"
-        lm += f"A: {ex['answer']}\n"
+        lm += f"Answer: {ex['answer']}\n"
     return lm
 
 
