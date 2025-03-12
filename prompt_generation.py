@@ -10,22 +10,6 @@ from guidance import models, gen, select
 
 @guidance
 def prompt_gen(lm, data, rhetorics=False):
-    lm += data["system"]
-    lm += data["prompt"]
-    if rhetorics:
-        lm += "\n" + data["rhetorics"]
-    lm += "\nExamples:\n"
-    for ex in data["examples"]:
-        lm += "---\n"
-        lm += f"Word: {ex['lemma']}\n"
-        lm += "Sentences:\n"
-        lm += f"1) {ex['e1']}\n"
-        lm += f"2) {ex['e2']}\n"
-        lm += f"1. {ex['r1']}\n"
-        lm += f"2. {ex['r2']}\n"
-        if rhetorics:
-            lm += f"3. {ex['c']}\n"
-        lm += f"Answer: {ex['answer']}\n"
     return lm
 
 
@@ -72,16 +56,37 @@ def main(raw_args=None):
     style = 'rhetorics' if args.rhetorics else 'cot'
     path = f"output/{args.model}/{args.task}/{style}"
     os.makedirs(path, exist_ok=True)
+    user = "<｜user｜>"
+    assistant = "<｜assistant｜>"
+
     for idx, w, a, b in tqdm(list(group.itertuples())):
-        lm = model + prompt_gen(data[args.task], args.rhetorics)
+        lm = model
+        lm += data[args.task]["system"]
+        lm += user
+        lm += data[args.task]["prompt"]
+        if args.rhetorics:
+            lm += "\n" + data[args.task]["rhetorics"]
+        lm += "\nExamples:\n"
+        for ex in data[args.task]["examples"]:
+            lm += "---\n"
+            lm += f"Word: {ex['lemma']}\n"
+            lm += "Sentences:\n"
+            lm += f"1) {ex['e1']}\n"
+            lm += f"2) {ex['e2']}\n"
+            lm += f"1. {ex['r1']}\n"
+            lm += f"2. {ex['r2']}\n"
+            if args.rhetorics:
+                lm += f"3. {ex['c']}\n"
+            lm += f"Answer: {ex['answer']}\n"
         lm += "---\n"
         lm += "Task:\n"
         lm += f"Word: {w.replace('_', ' ').capitalize()}\n"
         lm += "Sentences:\n"
         lm += f"1) {a}\n"
         lm += f"2) {b}\n"
-        lm += "Let's think step by step. "
-        lm += gen(max_tokens=1024)
+        lm += assistant
+        lm += "Let's think step-by-step."
+        lm += gen(max_tokens=4096)
         lm += "\nBased on my reasoning, here is my final answer:\n"
         lm += "Answer: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
