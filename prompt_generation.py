@@ -88,6 +88,10 @@ def main(raw_args=None):
         lm += "Let's think step-by-step."
         lm += gen(max_tokens=2048)
         lm += "\nBased on my reasoning, here is my final answer:\n"
+        lm += "\n1." + gen(stop="\n")
+        lm += "\n2." + gen(stop="\n")
+        if args.rhetorics:
+            lm += "\n3." + gen(stop="\n")
         lm += "Answer: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
