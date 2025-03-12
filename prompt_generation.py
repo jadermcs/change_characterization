@@ -86,7 +86,7 @@ def main(raw_args=None):
         lm += f"2) {b}\n"
         lm += assistant
         lm += "Let's think step-by-step."
-        lm += gen(max_tokens=4096)
+        lm += gen(max_tokens=2048)
         lm += "\nBased on my reasoning, here is my final answer:\n"
         lm += "Answer: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
