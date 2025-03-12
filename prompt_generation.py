@@ -58,6 +58,7 @@ def main(raw_args=None):
     os.makedirs(path, exist_ok=True)
     user = "<｜user｜>"
     assistant = "<｜assistant｜>"
+    end = "<｜end｜>"
 
     for idx, w, a, b in tqdm(list(group.itertuples())):
         lm = model
@@ -86,7 +87,7 @@ def main(raw_args=None):
         lm += f"2) {b}\n"
         lm += assistant
         lm += "Let's think step-by-step."
-        lm += gen(max_tokens=2048)
+        lm += gen(stop=end, max_tokens=2048)
         lm += "\nBased on my reasoning, here is my final answer:\n"
         lm += "\n1." + gen(stop="\n")
         lm += "\n2." + gen(stop="\n")
