@@ -7,16 +7,10 @@ from tqdm import tqdm
 import guidance
 from guidance import models, gen, select
 
-TEMP = 0.7
-
-user = "<｜User｜>"
-assistant = "<｜Assistant｜>"
-
 
 @guidance
 def prompt_gen(lm, data, rhetorics=False):
     lm += data["system"]
-    lm += user
     lm += data["prompt"]
     if rhetorics:
         lm += "\n" + data["rhetorics"]
@@ -86,11 +80,8 @@ def main(raw_args=None):
         lm += "Sentences:\n"
         lm += f"1) {a}\n"
         lm += f"2) {b}\n"
-        lm += assistant
-        lm += "<think>"
-        lm += gen(temperature=TEMP, stop="</think>", max_tokens=4096)
-        lm += "</think>\n"
-        lm += gen(temperature=TEMP, max_tokens=512)
+        lm += "Let's think step by step. "
+        lm += gen(max_tokens=1024)
         lm += "\nBased on my reasoning, here is my final answer:\n"
         lm += "Answer: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
