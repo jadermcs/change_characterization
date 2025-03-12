@@ -93,7 +93,7 @@ def main(raw_args=None):
         lm += "\n2." + gen(stop="\n")
         if args.rhetorics:
             lm += "\n3." + gen(stop="\n")
-        lm += "Answer: " + select(labels)
+        lm += "\nAnswer: " + select(labels)
         with open(f"{path}/{args.seed}_{idx}.txt", "w") as fout:
             fout.write(str(lm))
 
