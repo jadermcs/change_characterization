@@ -26,9 +26,17 @@ def few_shot(lm, lemma, usage1, usage2):
     Context 2: The plane landed just now.
     Answer: identical
     ---
+    Lemma: Cell
+    Context 1: Anyone leaves a cell phone or handheld at home, many of them faculty members from nearby.
+    Context 2: I just watch the dirty shadow the window bar makes across the wall of my cell.
+    Answer: different
+    ---
     Lemma: {lemma}
     Context 1: {usage1}
     Context 2: {usage2}
+    <think>
+    {gen(stop="\n")}
+    </think>
     Answer: {select(["identical", "different"], "answer")}
     """
     )
@@ -43,8 +51,8 @@ def rhetorical(lm, lemma, usage1, usage2):
     You are presented with two sentences that both contain a specific word.
     Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence represents the same sense with respect to its use in the first sentence.
     Follow these steps to complete the task:
-        Step 1. Rewrite the first sentence in a simplified form.
-        Step 2. Rewrite the second sentence in a simplified form.
+        Step 1. Rewrite the first sentence in a simplified form preserving the lemma.
+        Step 2. Rewrite the second sentence in a simplified form preserving the lemma.
         Step 3. Write a sentence that joins both sentences using zeugma and the same shared word.
             If the construction doesn't make a bad pun, the words have identical sense.
     Examples:
@@ -57,13 +65,25 @@ def rhetorical(lm, lemma, usage1, usage2):
     Conclusion: It doesn't make a bad pun so both sentences uses 'plane' with the same meaning.
     Answer: identical
     ---
+    Lemma: Cell
+    Context 1: Anyone leaves a cell phone or handheld at home, many of them faculty members from nearby.
+    Context 2: I just watch the dirty shadow the window bar makes across the wall of my cell.
+    1) Anyone leaves a cell phone at home.
+    2) The wall of my cell.
+    3) The wall of my cell which I leave at home.
+    Conclusion: It makes a bad pun and doesn't sound right as the word 'cell' has different meanings.
+    Answer: different
+    ---
     Lemma: {lemma}
     Context 1: {usage1}
     Context 2: {usage2}
-    1) {gen(stop="\n")}
-    2) {gen(stop="\n")}
-    3) {gen(stop="\n")}
-    Conclusion: {gen(stop="\n")}
+    <think>
+    {gen(stop="\n")}
+    </think>
+    1) {gen("s1", stop="\n")}
+    2) {gen("s2", stop="\n")}
+    3) {gen("s3", stop="\n")}
+    Conclusion: {gen("conclude", stop="\n")}
     Answer: {select(["identical", "different"], "answer")}
     """
     )
@@ -89,13 +109,13 @@ def main(raw_args=None):
     )
     parser.add_argument("dataset")
     parser.add_argument("prompt")
-    parser.add_argument("--ctx", type=int, default=1024)
+    parser.add_argument("--ctx", type=int, default=4096)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--model", required=True)
     args = parser.parse_args(raw_args)
     model = models.LlamaCpp(
         args.model,
-        # n_ctx=args.ctx,
+        n_ctx=args.ctx,
         # n_gpu_layers=-1,
         # flash_attn=True,
         # echo=False,
@@ -115,10 +135,19 @@ def main(raw_args=None):
         lm += rhetorical(example["LEMMA"], example["USAGE_x"], example["USAGE_y"])
         pred.append(lm["answer"])
         true.append(example["LABEL"])
-        p, r, fscore, _ = precision_recall_fscore_support(pred, true)
+        p, r, fscore, _ = precision_recall_fscore_support(
+            true, pred, average="weighted"
+        )
         progress_bar.set_description(f"fscore: {fscore:.3f}")
-        with open(path + "/{args.prompt}.jsonl", "w+") as fout:
-            fout.write(str(lm))
+        output = {
+            "s1": lm["s1"],
+            "s2": lm["s2"],
+            "s3": lm["s3"],
+            "conclude": lm["conclude"],
+            "answer": lm["answer"],
+        }
+        with open(path + f"/{args.prompt}.jsonl", "a") as fout:
+            fout.write(json.dumps(output) + "\n")
 
 
 if __name__ == "__main__":
