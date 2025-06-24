@@ -47,14 +47,14 @@ def rhetorical(lm, lemma, usage1, usage2):
     return (
         lm
         + f"""
-    You are an expert linguist analyzing lexical semantics problems.
-    You are presented with two sentences that both contain a specific word.
-    Your task is to analyze how this word is used in each sentence and determine if its usage in the second sentence represents the same sense with respect to its use in the first sentence.
+    You are an expert linguist.
+    You are presented with two sentences that both contain a shared word.
+    Your task is to create and analyze zeugmas.
     Follow these steps to complete the task:
         Step 1. Rewrite the first sentence in a simplified form preserving the lemma.
         Step 2. Rewrite the second sentence in a simplified form preserving the lemma.
         Step 3. Write a sentence that joins both sentences using zeugma and the same shared word.
-            If the construction doesn't make a bad pun, the words have identical sense.
+            If the construction doesn't make a bad pun, write same, otherwise, write different.
     Examples:
     Lemma: Plane
     Context 1: He loves planes and want to become a pilot.
@@ -62,8 +62,8 @@ def rhetorical(lm, lemma, usage1, usage2):
     1) He loves planes.
     2) The plane landed.
     3) He loves planes, like the one that landed.
-    Conclusion: It doesn't make a bad pun so both sentences uses 'plane' with the same meaning.
-    Answer: identical
+    Conclusion: It doesn't make a bad pun.
+    Answer: same
     ---
     Lemma: Cell
     Context 1: Anyone leaves a cell phone or handheld at home, many of them faculty members from nearby.
@@ -71,20 +71,20 @@ def rhetorical(lm, lemma, usage1, usage2):
     1) Anyone leaves a cell phone at home.
     2) The wall of my cell.
     3) The wall of my cell which I leave at home.
-    Conclusion: It makes a bad pun and doesn't sound right as the word 'cell' has different meanings.
+    Conclusion: It makes a bad pun.
     Answer: different
     ---
     Lemma: {lemma}
     Context 1: {usage1}
     Context 2: {usage2}
     <think>
-    {gen(stop="\n")}
+    {gen(stop='</think>')}
     </think>
     1) {gen("s1", stop="\n")}
     2) {gen("s2", stop="\n")}
     3) {gen("s3", stop="\n")}
     Conclusion: {gen("conclude", stop="\n")}
-    Answer: {select(["identical", "different"], "answer")}
+    Answer: {select(["same", "different"], "answer")}
     """
     )
 
