@@ -1,5 +1,5 @@
 scikit-learn
-llama-cpp-python
 tqdm
-guidance
 matplotlib
+vllm
+pandas
