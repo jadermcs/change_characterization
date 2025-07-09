@@ -1,5 +1,6 @@
 from openai import OpenAI
 import os
+import argparse
 import pandas as pd
 from tqdm import tqdm
 
@@ -65,9 +66,11 @@ def evaluate_wic_file(filepath: str, start_index: int, type: str = "zeugma"):
     predictions = []
     responses = []
     output = []
+    print(type)
+    exit()
 
     try:
-        for _, row in tqdm(df.iloc[start_index:].iterrows(), total=len(df)):
+        for i, row in tqdm(df.iloc[start_index:].iterrows(), total=len(df)):
             if type == "zeugma":
                 prompt = generate_zeugma_prompt(
                     row["LEMMA"], row["POS"], row["USAGE_x"], row["USAGE_y"]
@@ -80,13 +83,14 @@ def evaluate_wic_file(filepath: str, start_index: int, type: str = "zeugma"):
                 response = query_openai(prompt)
                 predicted_label = parse_model_answer(response)
             except Exception as e:
-                print(f"Error on row {_}: {e}")
+                print(f"Error on row {i}: {e}")
                 response = "unknown"
                 predicted_label = "unknown"
 
             responses.append(response)
             predictions.append(predicted_label)
-            output.append(
+
+            output = pd.DataFrame(
                 {
                     "lemma": row["LEMMA"],
                     "pos": row["POS"],
@@ -96,24 +100,28 @@ def evaluate_wic_file(filepath: str, start_index: int, type: str = "zeugma"):
                     "label": row["LABEL"],
                     "predicted_label": predicted_label,
                     "correct": row["LABEL"] == predicted_label,
-                }
+                },
+                index=[i],
+            ).reset_index()
+            output.to_json(
+                f"wic_{'zeugma_' if type == 'zeugma' else ''}results.jsonl",
+                orient="records",
+                lines=True,
+                mode="a",
             )
     except KeyboardInterrupt:
         print("\nInterrupted by user.")
-        print("Saving results...")
-
-    output = pd.DataFrame(output)
-    accuracy = output["correct"].sum() / output.shape[0]
-    print(
-        f"\n✅ Accuracy: {accuracy:.2%} ({output['correct'].sum()}/{output.shape[0]})"
-    )
-
-    # Optional: save results
-    output.to_json("wic_zeugma_results.jsonl", orient="records", lines=True, mode="a")
-
-    return output
 
 
 if __name__ == "__main__":
     # Replace with your file path
-    result_df = evaluate_wic_file("data/wic.test.json", start_index=0, type="zeugma")
+    args = argparse.ArgumentParser()
+    args.add_argument("type", type=str, help="Type of prompt", default="zeugma")
+    args.add_argument(
+        "file_path", type=str, help="File path", default="data/wic.test.json"
+    )
+    args.add_argument("start_index", type=int, help="Start index", default=0)
+    args = args.parse_args()
+    result_df = evaluate_wic_file(
+        args.file_path, start_index=args.start_index, type=args.type
+    )

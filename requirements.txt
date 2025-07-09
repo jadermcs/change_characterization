@@ -1,5 +1,5 @@
 scikit-learn
 tqdm
 matplotlib
-vllm
 pandas
+sglang[all]

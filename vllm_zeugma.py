@@ -250,11 +250,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--type", choices=["zeugma", "simple"], default="zeugma", help="Prompt type"
     )
+    parser.add_argument("--model", default="Qwen/Qwen3-8B", help="Model name/path")
     parser.add_argument(
-        "--model", default="meta-llama/Meta-Llama-3-8B-Instruct", help="Model name/path"
-    )
-    parser.add_argument(
-        "--batch_size", type=int, default=8, help="Batch size for inference"
+        "--batch_size", type=int, default=4, help="Batch size for inference"
     )
 
     args = parser.parse_args()
