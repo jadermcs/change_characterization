@@ -3,3 +3,4 @@ tqdm
 matplotlib
 pandas
 sglang[all]
+git@github.com:pierluigic/xl-lexeme.git
